@@ -8,8 +8,9 @@ Gem::Specification.new do |s|
   s.authors     = ["John Ramos"]
   s.email       = ["john.ramos@activenetwork.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{provides simpler syntax for the your-active service}
+  s.description = %q{provides simpler syntax for the your-active service}
+
 
   s.rubyforge_project = "fetch"
 
@@ -21,4 +22,6 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency 'httparty'
+  s.add_runtime_dependency 'activesupport'
 end
