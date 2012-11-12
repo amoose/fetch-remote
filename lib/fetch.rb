@@ -13,7 +13,6 @@ module Fetch
       @build_query = {}
       @type = :complete
       @result = {}
-      self
     end    
 
     def where(expr)
@@ -57,7 +56,7 @@ module Fetch
     def build_inequality(search_value, type)
       @build_query.each do |k,v|
         if v.instance_of? NullObject
-          @build_query = {"#{type}.gt" => search_value}
+          @build_query = {"#{k}.#{type}" => search_value}
           @type = :complete
           break
         end
