@@ -6,7 +6,7 @@ module Fetch
 
     def self.where hsh
       q = Query.new.where hsh
-      q.klass = Fetch::Activity
+      q.klass = self
       q
     end
 
