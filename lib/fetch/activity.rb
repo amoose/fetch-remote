@@ -12,7 +12,7 @@ module Fetch
 
     def save
       if @metadata["id"].nil?
-        HTTParty.post BASE_URL, :body => @metadata.to_json, :headers => { 'Content-Type' => 'application/json' }
+        HTTParty.post BASE_URL, :body => {"activity" => @metadata}.to_json, :headers => { 'Content-Type' => 'application/json' }
       else
       end
     end
