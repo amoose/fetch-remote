@@ -1,18 +1,20 @@
+require "fetch/activity"
 require "fetch/version"
 require 'httparty'
-require 'active_support'
+require 'active_support/core_ext'
 
 module Fetch
 
-  BASE_URL = 'http://0.0.0.0:3000/api/activity'
+  API_KEY = 'c3adae5c-6511-48ea-b8e8-c0427f049dd6'
+  BASE_URL = 'http://ec2-23-20-101-190.compute-1.amazonaws.com/api/activity?api_key='+API_KEY
 
-  class Activity
-    attr_accessor :build_query, :type, :result
+  class Query
+    attr_accessor :build_query, :type, :result, :klass
 
     def initialize
       @build_query = {}
       @type = :complete
-      @result = {}
+      @result = []
     end    
 
     def where(expr)
@@ -35,11 +37,14 @@ module Fetch
     # this method shoots the query out and receives its response
     def all()
       if @type == :complete
-        request = BASE_URL + "?#{@build_query.to_query}"
+        request = BASE_URL + "&#{@build_query.to_query}"
         response = HTTParty.get(request)
         # save the result set here
-        @result = response
-        return response
+        response.each do |element|
+          @result << klass.new(element)
+        end
+
+        @result
       else
         raise 'An error has occurred'
       end
