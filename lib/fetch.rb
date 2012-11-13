@@ -37,7 +37,8 @@ module Fetch
     # this method shoots the query out and receives its response
     def all()
       if @type == :complete
-        request = BASE_URL + "&#{@build_query.to_query}"
+        @build_query = {:query => @build_query}
+        request = BASE_URL + "&#{@build_query.to_query}" 
         response = HTTParty.get(request)
         # save the result set here
         response.each do |element|
