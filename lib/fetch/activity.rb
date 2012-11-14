@@ -4,6 +4,10 @@ module Fetch
       @metadata = hsh
     end
 
+    def self.create hsh={}
+      Fetch::Activity.new(hsh).save
+    end
+
     def self.where hsh
       q = Query.new.where hsh
       q.klass = self
