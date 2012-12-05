@@ -35,7 +35,7 @@ module Fetch
     end
 
     def limit(docs)
-      @built_query = { "limit": docs }
+      @build_query = { "limit": docs }
       @type = :complete
       return self
     end
