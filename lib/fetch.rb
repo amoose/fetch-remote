@@ -15,10 +15,10 @@ module Fetch
       @build_query = {}
       @type = :complete
       @result = []
-    end    
+    end
 
     def where(expr)
-      if expr.is_a?(Hash) # i.e. Fetch.where(:aus_id => '111') 
+      if expr.is_a?(Hash) # i.e. Fetch.where(:aus_id => '111')
         @build_query = @build_query.merge(expr)
         @type = :complete
       elsif expr.is_a?(String) # i.e. Fetch.where(:created_at).gt('2012-01-01')
@@ -34,11 +34,17 @@ module Fetch
       return self
     end
 
+    def limit(docs)
+      @built_query = { "limit": docs }
+      @type = :complete
+      return self
+    end
+
     # this method shoots the query out and receives its response
     def all()
       if @type == :complete
         @build_query = {:query => @build_query}
-        request = BASE_URL + "&#{@build_query.to_query}" 
+        request = BASE_URL + "&#{@build_query.to_query}"
         response = HTTParty.get(request)
         # save the result set here
         response.each do |element|
