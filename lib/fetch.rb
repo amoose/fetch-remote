@@ -39,7 +39,7 @@ module Fetch
       if @type == :complete
         @build_query = {:query => @build_query}
         request = BASE_URL + "&#{@build_query.to_query}&limit=100"
-        rails.logger request
+        Rails.logger request
         response = HTTParty.get(request)
         # save the result set here
         response.each do |element|
