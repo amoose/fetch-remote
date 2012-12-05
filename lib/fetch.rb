@@ -35,7 +35,7 @@ module Fetch
     end
 
     def limit(docs)
-      @build_query = { "limit": docs }
+      @build_query = { "limit" => docs }
       if @type == :complete
         @build_query = {:query => @build_query}
         request = BASE_URL + "&#{@build_query.to_query}"
