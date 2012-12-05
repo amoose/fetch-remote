@@ -38,7 +38,7 @@ module Fetch
     def all()
       if @type == :complete
         @build_query = {:query => @build_query}
-        request = BASE_URL + "&#{@build_query.to_query}"
+        request = BASE_URL + "&#{@build_query.to_query}&limit=100"
         response = HTTParty.get(request)
         # save the result set here
         response.each do |element|
