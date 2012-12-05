@@ -36,8 +36,19 @@ module Fetch
 
     def limit(docs)
       @build_query = { "limit": docs }
-      @type = :complete
-      return self
+      if @type == :complete
+        @build_query = {:query => @build_query}
+        request = BASE_URL + "&#{@build_query.to_query}"
+        response = HTTParty.get(request)
+        # save the result set here
+        response.each do |element|
+          @result << klass.new(element)
+        end
+
+        @result
+      else
+        raise 'An error has occurred'
+      end
     end
 
     # this method shoots the query out and receives its response
