@@ -14,12 +14,6 @@ module Fetch
       q
     end
 
-    def self.limit num=100
-      q = Query.new.limit num
-      q.klass = self
-      q
-    end
-
     def save
       if @metadata["id"].nil?
         HTTParty.post BASE_URL, :body => {"activity" => @metadata}.to_json, :headers => { 'Content-Type' => 'application/json' }
